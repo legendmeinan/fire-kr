@@ -236,9 +236,9 @@ jobs:
         if cf push ${{ env.APP_NAME }} --docker-image ${{ env.DOCKER_IMAGE }} -m ${{ env.MEMORY }} -k ${{ env.DISK }} --var VNC_PASSWORD="${{ secrets.VNC_PASSWORD || 'f1234568' }}" --health-check-type port; then
           echo "Deployment successful"
         else
-          #cf delete ${{ env.APP_NAME }} -f
+          cf delete ${{ env.APP_NAME }} -f
           echo "部署失败,可以进网站重启试试，如果不行，可能是资源不足"
-          #exit 1
+          exit 1
         fi
 
     - name: Verify deployment
